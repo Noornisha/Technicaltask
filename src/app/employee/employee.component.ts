@@ -28,7 +28,8 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.users = JSON.parse(localStorage.getItem('Items') || '{}'); // get employee list
+    this.users =  this.users.concat(JSON.parse(localStorage.getItem('Items') || '{}')); // get employee list
+   
     let result = this.users.filter((obj) => {
       return obj.firstName;
     });
@@ -39,8 +40,9 @@ export class EmployeeComponent implements OnInit {
     this.users.splice(i, 1);
     localStorage.setItem('Items', JSON.stringify(this.users));
   }
-  getnumber(){
-    
+  getUser(role:number){
+    let users = this.users.filter(user => user.role === role);
+    return users;
   }
  
   //search Employee

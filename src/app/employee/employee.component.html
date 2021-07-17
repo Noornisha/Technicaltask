@@ -21,13 +21,13 @@
                     <th style="width:20%;" scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngFor="let c of users ;let i = index">
+            <tbody *ngFor="let c of getUser(1) ;let i = index">
                 <tr *ngIf="c.role === 1">
                     <th scope="row">{{ i+1}}</th>
                     <td>{{c.firstName}}</td>
                     <td>{{c.lastName}}</td>
                     <td>User</td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(c)">Delete</button>
                 </tr>
 
             </tbody>
@@ -44,13 +44,13 @@
                     <th style="width:20%;" scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngFor="let d of users ;let i = index">
+            <tbody *ngFor="let d of getUser(2) ;let i = index">
               <tr *ngIf="d.role === 2">
                     <th scope="row">{{ i+1}}</th>
                     <td>{{d.firstName}}</td>
                     <td>{{d.lastName}}</td>
                     <td>Senior User</td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(d)">Delete</button>
                 </tr>
 
             </tbody>
@@ -66,13 +66,13 @@
                     <th style="width:20%;" scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngFor="let e of users ;let i = index">
+            <tbody *ngFor="let e of getUser(3) ;let i = index">
               <tr *ngIf="e.role === 3">
                     <th scope="row">{{ i+1}}</th>
                     <td>{{e.firstName}}</td>
                     <td>{{e.lastName}}</td>
                     <td >WFM</td>
-                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(e)">Delete</button>
                 </tr>
 
             </tbody>
