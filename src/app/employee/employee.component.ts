@@ -16,7 +16,7 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toastr: ToastrService
+    public toastr: ToastrService
   ) {
     this.addform = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -28,7 +28,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    this.users = JSON.parse(localStorage.getItem('Items') || '{}'); // get employee list
     let result = this.users.filter((obj) => {
       return obj.firstName;
     });
@@ -37,6 +37,9 @@ export class EmployeeComponent implements OnInit {
   }
   delete(i: any) {
     this.users.splice(i, 1);
+  }
+  getnumber(){
+    
   }
  
   //search Employee
