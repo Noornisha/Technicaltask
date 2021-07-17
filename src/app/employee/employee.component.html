@@ -1,0 +1,128 @@
+    <!-- navbar area, for filter input-->
+    <nav class="navbar sticky-top navbar-light bg-light">
+        <div class="container-fluid w-50">
+            <label for="search-user" class="col-sm-2 col-form-label">Search for employee:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="search-user" (keyup)="onSearchKeyUp()"  [(ngModel)]="search"  placeholder="Enter a name">
+            </div>
+        </div>
+    </nav>
+    <!-- /end of navbar area-->
+    <!-- part for displaying user content-->
+    <div class="container pt-5">
+        <h2>Users</h2>
+        <table class="table mb-5 align-middle" id="users" >
+            <thead>
+                <tr>
+                    <th style="width:20%;" scope="col">#</th>
+                    <th style="width:20%;" scope="col">First</th>
+                    <th style="width:20%;" scope="col">Last</th>
+                    <th style="width:20%;" scope="col">Role</th>
+                    <th style="width:20%;" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let c of users ;let i = index">
+                <tr *ngIf="c.role === 1">
+                    <th scope="row">{{ i+1}}</th>
+                    <td>{{c.firstName}}</td>
+                    <td>{{c.lastName}}</td>
+                    <td>User</td>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <h2>Senior Users</h2>
+        <table class="table mb-5 align-middle" id="senior-users" >
+            <thead>
+                <tr>
+                    <th style="width:20%;" scope="col">#</th>
+                    <th style="width:20%;" scope="col">First</th>
+                    <th style="width:20%;" scope="col">Last</th>
+                    <th style="width:20%;" scope="col">Role</th>
+                    <th style="width:20%;" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let d of users ;let i = index">
+              <tr *ngIf="d.role === 2">
+                    <th scope="row">{{ i+1}}</th>
+                    <td>{{d.firstName}}</td>
+                    <td>{{d.lastName}}</td>
+                    <td>Senior User</td>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                </tr>
+
+            </tbody>
+        </table>
+        <h2>WFM</h2>
+        <table class="table mb-5 align-middle" id="wfm-users" >
+            <thead>
+                <tr>
+                    <th style="width:20%;" scope="col">#</th>
+                    <th style="width:20%;" scope="col">First</th>
+                    <th style="width:20%;" scope="col">Last</th>
+                    <th style="width:20%;" scope="col">Role</th>
+                    <th style="width:20%;" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let e of users ;let i = index">
+              <tr *ngIf="e.role === 3">
+                    <th scope="row">{{ i+1}}</th>
+                    <td>{{e.firstName}}</td>
+                    <td>{{e.lastName}}</td>
+                    <td >WFM</td>
+                    <td><button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(i)">Delete</button>
+                </tr>
+
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-user-modal">
+            Add User
+        </button>
+    </div>
+    <!-- /end of displaying content-->
+    <!-- modal area-->
+    <div class="modal fade" id="add-user-modal" tabindex="-1" aria-labelledby="add-user-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-user-modal-label">Add a new user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addform">
+                    <div class="mb-3">
+                        <label for="first-name-input">First Name</label>
+                        <input type="text" class="form-control" id="first-name-input" placeholder="Mark" formControlName="firstName">
+                        <small class="form-text  " *ngIf="!addform.get('firstName').valid && (addform.get('firstName').dirty || addform.get('firstName').touched)">
+                            this feild is required !
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last-name-input">Last Name</label>
+                        <input type="text" class="form-control" id="last-name-input" placeholder="Otto" formControlName="lastName">
+                        <small class="form-text  " *ngIf="!addform.get('lastName').valid && (addform.get('lastName').dirty || addform.get('lastName').touched)">
+                            this feild is required !
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role-select">Role</label>
+                        <select class="form-select" id="role-select" aria-label="Role select" formControlName="role" (change)="patchRole($event)">
+                            <option selected>Select a role</option>
+                            <option value="1">User</option>
+                            <option value="2">Senior User</option>
+                            <option value="3">WFM</option>
+                        </select>
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addEmployee()" [disabled]="!addform.valid">Save changes</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- /end of modal area.-->
