@@ -37,6 +37,7 @@ export class EmployeeComponent implements OnInit {
   }
   delete(i: any) {
     this.users.splice(i, 1);
+    localStorage.setItem('Items', JSON.stringify(this.users));
   }
   getnumber(){
     
